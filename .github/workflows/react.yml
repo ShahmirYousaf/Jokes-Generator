@@ -14,27 +14,27 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '22.4.0'
 
       - name: Install dependencies
-        run: npm install
+        run: cd frontend && npm install
 
       - name: Run ESLint
-        run: npx eslint . --ext .js,.jsx,.ts,.tsx || echo "Lint errors detected"
+        run: cd frontend && npx eslint . --ext .js,.jsx,.ts,.tsx || echo "Lint errors detected"
 
       - name: Build code
-        run: npm run build
+        run: cd frontend && npm run build
 
       - name: Zip build
         run: zip -r build.zip build
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: build-artifact
           path: build.zip
