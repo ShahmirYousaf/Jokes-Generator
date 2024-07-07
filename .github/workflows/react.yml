@@ -31,10 +31,10 @@ jobs:
         run: cd frontend && npm run build
 
       - name: Zip build
-        run: zip -r build.zip build
+        run: cd frontend && zip -r build.zip build
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact
-          path: build.zip
+          path: frontend/build.zip
